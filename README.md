@@ -1,5 +1,5 @@
-### My solutions to the Project Euler problems.
+### My solutions to the [Project Euler](https://projecteuler.net/) problems.
 
-They begin very gently and ramp up to some gnarly business indeed.
+These begin very gently and ramp up to some gnarly business indeed, involving maths textbooks and TAOCP.
 
-Technical weight-training. C# and JS
+A course of technical weight-training. C# and JS
