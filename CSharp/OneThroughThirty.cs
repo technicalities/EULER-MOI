@@ -7,11 +7,6 @@ namespace ProjectEuler
 
 static class OneThroughThirty
 {
-    static void getOut<T> (T output, int soln)
-    {
-      Console.WriteLine("Solution " + soln + " is: " + output);
-    }
-
     //  1. Find the sum of all multiples of 3 or 5 below 1000.
     //  sumThreesAndFivesBelowLimit()
 		public static void EulerOne (int limit)
@@ -24,7 +19,7 @@ static class OneThroughThirty
               sum += i;
           }
       }
-      getOut<int>(sum, 1);
+      Console.WriteLine("Solution 1 is " + sum);
 		}
 
     //  2. Find the sum of the even terms in the Fibonacci subsequence below 4m.
@@ -43,7 +38,7 @@ static class OneThroughThirty
           g = h;
           h = i;
       }
-      getOut<int>(sum, 2);
+      Console.WriteLine("Solution 2 is " + sum);
 	   }
      // The actually distinctive C# solution would be LINQing it:
      //     List<int> fibonacci = new List<int>(); ...
@@ -66,7 +61,7 @@ static class OneThroughThirty
                 primes.Add(i);
             }
         }
-        getOut<int>(factors.Last(), 3);
+        Console.WriteLine("Solution 3 is " + factors.Last() );
       }
 
 
@@ -89,7 +84,7 @@ static class OneThroughThirty
           }
         }
       }
-      getOut(maxPalindrome, 4);
+      Console.WriteLine("Solution 4 is " + maxPalindrome );
   }
   private static bool isPalindrome (int product)
   {
@@ -130,20 +125,29 @@ static class OneThroughThirty
         leastDividend = candidate;
      }
 
-     getOut<int?>(leastDividend, 6);
+     Console.WriteLine("Solution 5 is : " + leastDividend);
   }
 
 
-//  6.
-//   public static void EulerSix (int target)
-//   {   long source = (long)target;
-//       int sum = 0;
-//       for (var i = 2; i < Math.Sqrt(source); i++)
-//       {
-//
-//       }
-//       getOut(sum);
-//   }
+//  6. Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+//  powerOfSumMinusSumOfPowers()
+public static void EulerSix (int terminus, int power)
+{
+    int sum = 0;
+    double diff, powerSum;
+    diff = powerSum = 0.0;
+    // Sum of a finite arithmetic sequence is just: \frac{n(n+1)}{2}
+    sum = terminus * (terminus+1) / 2;
+
+    // Sum of the powers of each, 1 to terminus:
+    for (int i = 1; i <= terminus; i++)
+    {    powerSum += Math.Pow(i, power);    }
+
+    diff = Math.Pow(sum, power) - powerSum ;
+    Console.WriteLine("Solution 6 is: " + diff);
+}
+
+
 //
 // //  7.
 //   public static void EulerSeven (int target)
