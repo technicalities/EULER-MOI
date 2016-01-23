@@ -9,10 +9,10 @@ public static class RunEuler
     {
       pe.EulerOne(1000);    //  sumThreesAndFivesBelowLimit()
       pe.EulerTwo(4000000); //  sumEvenFibonaccisBelowLimit()
-      // 70 seconds on a netbook
-      pe.EulerThree(600851475143); //  maxPrimeFactor()
+      pe.EulerThree(600851475143); //  maxPrimeFactor()      // 70secs w/netbook
       pe.EulerFour(3);      //  findMaxPalindromeForN()
       pe.EulerFive(20);     //  getLeastCommonDividend();
       pe.EulerSix(100, 2);  //  powerOfSumMinusSumOfPowers()
+      pe.EulerSeven(10001);    //  getNthPrime()
     }
 }

@@ -7,62 +7,61 @@ namespace ProjectEuler
 
 static class OneThroughThirty
 {
-    //  1. Find the sum of all multiples of 3 or 5 below 1000.
-    //  sumThreesAndFivesBelowLimit()
-		public static void EulerOne (int limit)
-		{
-      int sum = 0;
-      for (var i = 1; i < limit; i++)
-      {
-          if (i % 3 == 0 || i % 5 == 0)
-          {
-              sum += i;
-          }
-      }
-      Console.WriteLine("Solution 1 is " + sum);
-		}
-
-    //  2. Find the sum of the even terms in the Fibonacci subsequence below 4m.
-    //  sumEvenFibonaccisBelowLimit()
-		public static void EulerTwo (int limit)
-    {
-      int sum = 0; // skip the first evennum as a special case
-      int g,h;
-      g = 1;
-      h = 2;
-
-      for (var i = 3; i < limit; i = g+h)
-      {   if (i % 2 == 0)
-		        sum += i;
-
-          g = h;
-          h = i;
-      }
-      Console.WriteLine("Solution 2 is " + sum);
-	   }
-     // The actually distinctive C# solution would be LINQing it:
-     //     List<int> fibonacci = new List<int>(); ...
-     //     var sum = fibonacci.Where(i => (i % 2 == 0)).Sum(i => (long)i);
+  //  1. Find the sum of all multiples of 3 or 5 below 1000.
+  //  sumThreesAndFivesBelowLimit()
+	public static void EulerOne (int limit)
+	{
+    int sum = 0;
+    for (var i = 1; i < limit; i++)
+    {   if (i % 3 == 0 || i % 5 == 0)
+        {		sum += i;		}
+    }
+    Console.WriteLine("Solution 1 is " + sum);
+	}
+	// O(n) in time, O(1) in space.
 
 
-    //  3. Get the largest prime factor of 600851475143
-    //  maxFactor()
-    public static void EulerThree (long target)
-    {   List<int> factors = new List<int>();
-        List<int> primes = new List<int>();
-        for (var i = 2; i < Math.Sqrt(target); i++)
-        {
-            if ( !primes.Exists(p => (i % p == 0)) )
-            {
-              if (target % i == 0)
-              {
-                factors.Add(i);
-              }
-                primes.Add(i);
-            }
-        }
-        Console.WriteLine("Solution 3 is " + factors.Last() );
-      }
+  //  2. Find the sum of the even terms in the Fibonacci subsequence below 4m.
+  //  sumEvenFibonaccisBelowLimit()
+	public static void EulerTwo (int limit)
+  {
+    int sum = 0;
+    int g,h;
+    g = 1;
+    h = 2;
+
+    for (var i = 3; i < limit; i = g+h)
+    {   if (i % 2 == 0)
+	        sum += i;
+
+        g = h;
+        h = i;
+    }
+    Console.WriteLine("Solution 2 is " + sum);
+   }
+	 // O() in time, O() in space.
+   // The actually distinctive C# solution would be LINQing it:
+   //     var sum = fibonacci.Where(i => (i % 2 == 0)).Sum(i => (long)i);
+
+
+	//  3. Get the largest prime factor of 600851475143
+	//  maxFactor()
+	public static void EulerThree (long target)
+	{   List<int> factors = new List<int>();
+	    List<int> primes = new List<int>();
+			// Key: if no primes smaller than <number> are a proper divisor of it, <number> is prime
+	    for (var i = 2; i < Math.Sqrt(target); i++)
+	    {
+	        if ( !primes.Exists(p => (i % p == 0)) )
+	        {
+	          if (target % i == 0)
+	          {		factors.Add(i);		}
+	          primes.Add(i);
+	        }
+	    }
+	    Console.WriteLine("Solution 3 is " + factors.Last() );
+	  }
+// O() in time, O(log n) in space.
 
 
   //  4.  Find the largest palindrome made from the product of two 3-digit numbers.
@@ -101,15 +100,17 @@ static class OneThroughThirty
     }
     return true;
   }
+// O() in time, O() in space.
 
 
-  //  5.  What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
-  //  getLeastCommonDividend(10); // => 2520
+  //  5.  Find the smallest positive number evenly divisible by all numbers from 1-20?
+  //  getLeastCommonDividend();
   public static void EulerFive (int limit)
   {
       int candidate = 1;
       int? leastDividend = null;
-      // If divisible by 20 then divisible by 2,4,5,10. If 18 then also 3,6,9. etc...
+      // Key: if candidate is divisible by <number> then it's divisible by all <number>'s factors.
+			// Thus we can omit the first half of factor list:
       int initial = (limit / 2);
 
       while (! leastDividend.HasValue )
@@ -127,39 +128,58 @@ static class OneThroughThirty
 
      Console.WriteLine("Solution 5 is : " + leastDividend);
   }
+// O() in time, O() in space.
 
 
-//  6. Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
-//  powerOfSumMinusSumOfPowers()
+//  6. Find the difference between the sum of the squares of the first 100 natural numbers
+//  and the square of the sum. //  powerOfSumMinusSumOfPowers()
 public static void EulerSix (int terminus, int power)
 {
     int sum = 0;
     double diff, powerSum;
     diff = powerSum = 0.0;
-    // Sum of a finite arithmetic sequence is just: \frac{n(n+1)}{2}
+		// Key fact: the sum of a subsequence of the naturals is just: \frac{n(n+1)}{2}
     sum = terminus * (terminus+1) / 2;
 
-    // Sum of the powers of each, 1 to terminus:
+    // Sum the powers of each from 1 to terminus:
     for (int i = 1; i <= terminus; i++)
     {    powerSum += Math.Pow(i, power);    }
 
     diff = Math.Pow(sum, power) - powerSum ;
     Console.WriteLine("Solution 6 is: " + diff);
 }
+// O() in time, O() in space.
 
 
-//
-// //  7.
-//   public static void EulerSeven (int target)
-//   {   long source = (long)target;
-//       int sum = 0;
-//       for (var i = 2; i < Math.Sqrt(source); i++)
-//       {
-//
-//       }
-//       getOut(sum);
-//   }
-//
+//  7. Find the 10001st prime. getNthPrime(int n)
+public static void EulerSeven(int n)
+{
+   List<int> primes = new List<int>();  // Store primes as we go
+   int first = 2;
+   primes.Add(first);
+   // Only need to test odd numbers: init to 1, iterate +2:
+   int candidate = 1;
+   bool isPrime;
+
+   while(primes.Count < n)
+   {
+     candidate += 2;
+     isPrime = true; 			// seek disproof
+		 // Key: see line 52 above.
+     for (int j = 0; primes[j] * primes[j] <= candidate; j++ )
+		 {   if (candidate % primes[j] == 0)
+			   {   isPrime = false;
+             break;
+         }
+     }
+     if (isPrime)
+		 {		primes.Add(candidate);		}
+   }
+   Console.WriteLine("Solution 7 is " + primes.Last());
+}
+// Time O(n^2), space O(n).
+
+
 // //  8.
 //   public static void EulerEight (int target)
 //   {   long source = (long)target;
