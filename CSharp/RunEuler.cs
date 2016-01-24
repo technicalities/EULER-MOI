@@ -15,8 +15,9 @@ public static class RunEuler
       // pe.EulerFive(20);     //  getLeastCommonDividend();
       // pe.EulerSix(100, 2);  //  powerOfSumMinusSumOfPowers()
       // pe.EulerSeven(10001);    //  getNthPrime()
-      pe.EulerEight(data.NOZERO, 4);  // -> 5832
-      pe.EulerEight(data.SERIES_EIGHT, 4);  // -> 5832
-      pe.EulerEight(data.SERIES_EIGHT, 13);  // largestAdjacentProductInSeries()
+
+      pe.EulerEight(data.SERIES_EIGHT, 4);    // -> 5832
+      pe.EulerEight(data.SERIES_EIGHT, 13);   // largestProductInSeries()
+      // 23,514,624,000
     }
 }

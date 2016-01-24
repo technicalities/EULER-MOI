@@ -180,39 +180,49 @@ public static void EulerSeven(int n)
 // Time O(n^2), space O(n).
 
 
-//  8. Find the largest product of 13 adjacent numbers in {{ProblemData.SERIES_EIGHT}}
-//  Solution uses a sliding product: Find 1st n-product, multiply by next char and divide by last.
-//  This takes much more code but is cooler.
+//  8. Find the largest product of n=13 adjacent numbers in {{ProblemData.SERIES_EIGHT}}
+//  Solution is a sliding product: Find 1st n-product, multiply by next char and divide by last.
+//  This takes much more code because of zeroes breaking the chain, but is much cooler.
 public static void EulerEight(String series, int n)
 {
-	 long product = getProduct(series.Substring(0, n));
-	 long max = product;			// max possible product is 9^13 > Int32.Max.
+	 long product = getProductFromString(series.Substring(0, n));
+	 long max = product;	//  max possible is 9^13 > Int32.Max.
 
    for (int j = n; j < series.Length; j++)
    {
 	 	  int next = (series[j] - '0');
 		  int previous = (series[j-n] - '0');
-			if (next == 0 && j < series.Length - n)
+			// If you come to a 0, jump it and get a fresh product
+			if (next == 0 && j < (series.Length - n) )
 			{
 					j += n;
-					product = getProduct( series.Substring(j, n) );  // get a fresh product to work with
+					do
+					{ // Keep trying until you hit a nonzero stretch of length n:
+						product = getProductFromString(series.Substring(j-(n-1), n));
+						if (product == 0)	 {
+							j++;
+						}
+					}
+					while (product == 0 && j < (series.Length - n));
 					continue;
 			}
-
-			previous = (previous == 0) ? 1 : previous; // have to prevent DIV/0s
-			product = product * next / previous;		// all the rest of the machinery is for this nice line.
-
+			else
+			{
+				previous = (previous == 0) ? 1 : previous; // have to prevent DIV/0s
+				product = product * next / previous;			// all the rest of the machinery is for this nice line.
+			}
 			if (product > max)
 				max = product;
    }
-   Console.WriteLine("Solution 8 is " + max);
+   Console.WriteLine("Solution 8 is " + max + "\n\n");
 }
-// Time O(n^2), space O(n).
-private static long getProduct(string subseries)
+// Time O(n^2), space O(n) by string length; Time O(n^2), space O(n) by multiplicand width.
+private static long getProductFromString(string subseries)
 {
 		int product = 1;
 		for (int i = 0; i < subseries.Length; i++)
 		{ 	product *= (subseries[i] - '0');		}		// char to int
+
 		return product;
 }
 
@@ -243,29 +253,6 @@ public static class ProblemData
 			"84580156166097919133875499200524063689912560717606" +
 			"05886116467109405077541002256983155200055935729725" +
 			"71636269561882670428252483600823257530420752963450";
-
-		public const String NOZERO =
-			"7316717653133624919225119674426574742355349194934" +
-			"9698352312774563262395783181698481869478851843" +
-			"8586156789112949495459517379583319528532885511" +
-			"125469874715852386357156932996329522744343557" +
-			"66896648954452445231617318564398711121722383113" +
-			"62229893423383813533627661428286444486645238749" +
-			"33589729629491564477239713815158593796866" +
-			"717242712188399879798792274921916997288893776" +
-			"65727333153367881222354218975125454594752243" +
-			"525849771167556136483958644676324415722155397" +
-			"536978179778461746495514929862569321978468622482" +
-			"83972241375657565749261479729686524145351474" +
-			"82166374844319989889524345658541227588666881" +
-			"1642717147992444292823863465674813919123162824586" +
-			"17866458359124566529476545682848912883142676942" +
-			"2421922671556263211111937544217569416589648" +
-			"719843859624554443629812398787992724428499188" +
-			"8458156166979191338754992524636899125671766" +
-			"58861164671945775412256983155255935729725" +
-			"71636269561882674282524836823257534275296345";
-
 }
 
 }
