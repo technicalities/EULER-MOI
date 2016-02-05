@@ -8,16 +8,16 @@ public static class RunEuler
 {
     static public void Main(string[] args)
     {
-      // pe.EulerOne(1000);    //  sumThreesAndFivesBelowLimit()
-      // pe.EulerTwo(4000000); //  sumEvenFibonaccisBelowLimit()
-      // pe.EulerThree(600851475143); //  maxPrimeFactor()      // 70secs w/netbook
-      // pe.EulerFour(3);      //  findMaxPalindromeForN()
-      // pe.EulerFive(20);     //  getLeastCommonDividend();
-      // pe.EulerSix(100, 2);  //  powerOfSumMinusSumOfPowers()
-      // pe.EulerSeven(10001);    //  getNthPrime()
+      // pe.Euler1(1000);    //  sumThreesAndFivesBelowLimit()
+      // pe.Euler2(4000000); //  sumEvenFibonaccisBelowLimit()
+      // pe.Euler3(600851475143); //  maxPrimeFactor()      // 70secs w/netbook
+      // pe.Euler4(3);      //  findMaxPalindromeForN()
+      // pe.Euler5(20);     //  getLeastCommonDividend();
+      // pe.Euler6(100, 2);  //  powerOfSumMinusSumOfPowers()
+      // pe.Euler7(10001);    //  getNthPrime()
 
-      pe.EulerEight(data.SERIES_EIGHT, 4);    // -> 5832
-      pe.EulerEight(data.SERIES_EIGHT, 13);   // largestProductInSeries()
-      // 23,514,624,000
+      pe.Euler8(data.SERIES_EIGHT, 4);    // -> 5832
+      pe.Euler8(data.SERIES_EIGHT, 13);   // largestProductInSeries() // 23,514,624,000
+      pe.Euler9(1000);   // largestProductInSeries()
     }
 }

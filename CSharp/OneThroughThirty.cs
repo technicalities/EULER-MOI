@@ -9,7 +9,7 @@ static class OneThroughThirty
 {
   //  1. Find the sum of all multiples of 3 or 5 below 1000.
   //  sumThreesAndFivesBelowLimit()
-	public static void EulerOne (int limit)
+	public static void Euler1 (int limit)
 	{
     int sum = 0;
     for (var i = 1; i < limit; i++)
@@ -23,7 +23,7 @@ static class OneThroughThirty
 
   //  2. Find the sum of the even terms in the Fibonacci subsequence below 4m.
   //  sumEvenFibonaccisBelowLimit()
-	public static void EulerTwo (int limit)
+	public static void Euler2 (int limit)
   {
     int sum = 0;
     int g,h;
@@ -46,7 +46,7 @@ static class OneThroughThirty
 
 	//  3. Get the largest prime factor of 600851475143
 	//  maxFactor()
-	public static void EulerThree (long target)
+	public static void Euler3 (long target)
 	{   List<int> factors = new List<int>();
 	    List<int> primes = new List<int>();
 			// Key: if no primes smaller than <number> are a proper divisor of it, <number> is prime
@@ -66,7 +66,7 @@ static class OneThroughThirty
 
   //  4.  Find the largest palindrome made from the product of two 3-digit numbers.
   //  findMaxPalindromeForN ()
-  public static void EulerFour (int digits)
+  public static void Euler4 (int digits)
   {   int maxMultiplicand = Int32.Parse(String.Concat(Enumerable.Repeat("9", digits)));
       var product = 0;
       var maxPalindrome = 0;
@@ -105,7 +105,7 @@ static class OneThroughThirty
 
   //  5.  Find the smallest positive number evenly divisible by all numbers from 1-20?
   //  getLeastCommonDividend();
-  public static void EulerFive (int limit)
+  public static void Euler5 (int limit)
   {
       int candidate = 1;
       int? leastDividend = null;
@@ -133,7 +133,7 @@ static class OneThroughThirty
 
 //  6. Find the difference between the sum of the squares of the first 100 natural numbers
 //  and the square of the sum. //  powerOfSumMinusSumOfPowers()
-public static void EulerSix (int terminus, int power)
+public static void Euler6 (int terminus, int power)
 {
     int sum = 0;
     double diff, powerSum;
@@ -152,7 +152,7 @@ public static void EulerSix (int terminus, int power)
 
 
 //  7. Find the 10001st prime. getNthPrime(int n)
-public static void EulerSeven(int n)
+public static void Euler7 (int n)
 {
    List<int> primes = new List<int>();  // Store primes as we go
    int first = 2;
@@ -183,11 +183,11 @@ public static void EulerSeven(int n)
 //  8. Find the largest product of n=13 adjacent numbers in {{ProblemData.SERIES_EIGHT}}
 //  Solution is a sliding product: Find 1st n-product, multiply by next char and divide by last.
 //  This takes much more code because of zeroes breaking the chain, but is much cooler.
-public static void EulerEight(String series, int n)
+public static void Euler8(String series, int n)
 {
 	 long product = getProductFromString(series.Substring(0, n));
 	 long max = product;	//  max possible is 9^13 > Int32.Max.
-
+	 Console.WriteLine(max);
    for (int j = n; j < series.Length; j++)
    {
 	 	  int next = (series[j] - '0');
@@ -196,12 +196,11 @@ public static void EulerEight(String series, int n)
 			if (next == 0 && j < (series.Length - n) )
 			{
 					j += n;
+		 			Console.Write("max at" + j + " is: "+ max + "   ");
 					do
 					{ // Keep trying until you hit a nonzero stretch of length n:
 						product = getProductFromString(series.Substring(j-(n-1), n));
-						if (product == 0)	 {
-							j++;
-						}
+						if (product == 0)	 {		j++;		}
 					}
 					while (product == 0 && j < (series.Length - n));
 					continue;
@@ -226,6 +225,42 @@ private static long getProductFromString(string subseries)
 		return product;
 }
 
+
+
+
+// Find the product abc for the Pythagorean triple for which a + b + c = 1000.
+// getPythTripleProduct()
+public static int Euler9 (int sumOfRoots)
+{
+    int productOfTriple = 0;
+    int m = 2;
+    int n = 1;
+
+    while (productOfTriple === 0)
+    {
+        int[] triple = getCorrespondingPrimitiveTriple(m, n);
+        int sum = triple[0] + triple[1] + triple[2];
+
+    		if ( sum == sumOfRoots )
+        {
+            productOfTriple = triple[0] * triple[1] * triple[2];
+            Console.WriteLine("a= "+triple[0] +", b=" + triple[1] + ", c=" + triple[2]);
+        }
+        m++;
+        n++;
+    }
+    return productOfTriple;
+}
+// By Euclid's formula for primitives: (Not enough; ours is not a primitive triple)
+private int getCorrespondingPrimitiveTriple (int m, int n)
+{
+    int a = m*m - n*n;
+    int b = 2 * m*n;
+    int c = m*m + n*n;
+    return int[] triple = new int[3] { a, b, c };
+}
+
+
 }
 
 
@@ -233,7 +268,7 @@ private static long getProductFromString(string subseries)
 public static class ProblemData
 {
 		public const String SERIES_EIGHT =
-			"7316717653133624919225119674426574742355349194934" +
+			"73167176531330624919225119674426574742355349194934" +
 			"96983520312774506326239578318016984801869478851843" +
 			"85861560789112949495459501737958331952853208805511" +
 			"12540698747158523863050715693290963295227443043557" +
@@ -246,8 +281,8 @@ public static class ProblemData
 			"53697817977846174064955149290862569321978468622482" +
 			"83972241375657056057490261407972968652414535100474" +
 			"82166370484403199890008895243450658541227588666881" +
-			"16427171479924442928230863465674813919123162824586" +
 			"17866458359124566529476545682848912883142607690042" +
+			"16427171479924442928230863465674813919123162824586" +
 			"24219022671055626321111109370544217506941658960408" +
 			"07198403850962455444362981230987879927244284909188" +
 			"84580156166097919133875499200524063689912560717606" +
