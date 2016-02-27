@@ -251,7 +251,7 @@ public static int Euler9 (int sumOfRoots)
     }
     return productOfTriple;
 }
-// By Euclid's formula for primitives: (Not enough; ours is not a primitive triple)
+// Euclid's formula for primitives doesn't do it; but now we know the solution is not a primitive triple)
 private int getCorrespondingPrimitiveTriple (int m, int n)
 {
     int a = m*m - n*n;
